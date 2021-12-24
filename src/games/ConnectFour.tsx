@@ -15,11 +15,12 @@ const ConnectFour = () => {
     }
   }
 
-  const showPlayableSlotInColumn = (slot: number) => {
-    // NOTE: 0 is column 7
-
-    console.log(slot % 7, slot)
-    console.log(findPlayableSlot((slot % 7 === 0) ? 7 : slot % 7))
+  const highlightPlayableSlotInColumn = (show: boolean, slot: number) => {
+    if (show) {
+        document.getElementById(`slot-${findPlayableSlot((slot % 7 === 0) ? 7 : slot % 7)}`)?.classList.add('fill-red-100')
+    } else {
+        document.getElementById(`slot-${findPlayableSlot((slot % 7 === 0) ? 7 : slot % 7)}`)?.classList.remove('fill-red-100')
+    }
   }
 
   return (
@@ -30,7 +31,8 @@ const ConnectFour = () => {
             <div key={i} className='aspect-square p-0.5 h-[calc(100%/6)]'>
               <svg
                 id={`slot-${i + 1}`}
-                onMouseEnter={() => showPlayableSlotInColumn(i + 1)}
+                onMouseEnter={() => highlightPlayableSlotInColumn(true, i + 1)}
+                onMouseLeave={() => highlightPlayableSlotInColumn(false, i + 1)}
                 viewBox='0 0 100 100'
                 className='fill-white'
                 xmlns='http://www.w3.org/2000/svg'
