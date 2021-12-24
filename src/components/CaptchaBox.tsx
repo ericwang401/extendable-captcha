@@ -6,7 +6,7 @@ import Popup from '@components/Popup'
 import logo from '@assets/images/logo_48.png'
 import checkmark from '@assets/images/checkmark.png'
 
-interface CaptchaBoxProps {
+interface CaptchaBoxPropsInterface {
   title: string;
   verified: boolean;
   message?: ReactNode | string;
@@ -14,7 +14,7 @@ interface CaptchaBoxProps {
   disabled?: boolean;
 }
 
-const CaptchaBox = (props: CaptchaBoxProps) => {
+const CaptchaBox = (props: CaptchaBoxPropsInterface) => {
   const [show, setShow] = useState(false)
   const [checkmarkStyle, setCheckmarkStyle] = useState({
     backgroundImage: 'url(' + checkmark + ')',
@@ -40,8 +40,6 @@ const CaptchaBox = (props: CaptchaBoxProps) => {
         }
       }, 300)
     }
-
-
   }
 
   return (

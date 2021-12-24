@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import CaptchaBox from '@components/CaptchaBox'
 
+// games
+import ConnectFour from '@/games/ConnectFour'
+
 const App = () => {
   const [verified, setVerified] = useState(false)
   const [disabled, setDisabled] = useState(true)
@@ -13,11 +16,11 @@ const App = () => {
     setVerified(true)
   }
 
-  const message = <p>penis</p>
+  const message = <p>l0l u suck</p>
 
   return (
-    <CaptchaBox title="test" message={message} verified={verified} disabled={disabled}>
-      <button onClick={() => handle()}>free robux here</button>
+    <CaptchaBox title="play connect 4" message={message} verified={verified} disabled={disabled}>
+      <ConnectFour />
     </CaptchaBox>
   )
 }

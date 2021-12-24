@@ -1,7 +1,7 @@
 import React, { Fragment, ReactNode } from 'react'
 import { Transition } from '@headlessui/react'
 
-interface PopupProps {
+interface PopupPropsInterface {
   title: string;
   show: boolean;
   message?: ReactNode | string;
@@ -11,7 +11,7 @@ interface PopupProps {
   disabled?: boolean;
 }
 
-const Popup = (props: PopupProps) => {
+const Popup = (props: PopupPropsInterface) => {
   return (
     <Transition
       as={Fragment}
