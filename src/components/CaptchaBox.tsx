@@ -7,6 +7,7 @@ import logo from '@assets/images/logo_48.png'
 import checkmark from '@assets/images/checkmark.png'
 
 interface CaptchaBoxProps {
+  title: string;
   verified: boolean;
   message?: ReactNode | string;
   children?: ReactNode;
@@ -120,6 +121,7 @@ const CaptchaBox = (props: CaptchaBoxProps) => {
       </div>
 
       <Popup
+        title={props.title}
         show={show}
         message={props.message}
         onBlur={() => setShow(false)}

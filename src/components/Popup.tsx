@@ -2,6 +2,7 @@ import React, { Fragment, ReactNode } from 'react'
 import { Transition } from '@headlessui/react'
 
 interface PopupProps {
+  title: string;
   show: boolean;
   message?: ReactNode | string;
   onSubmit: Function;
@@ -31,9 +32,9 @@ const Popup = (props: PopupProps) => {
           <div className='px-2 mt-2 mb-2'>
             <div className='w-full p-6 text-white bg-blue-500'>
               <h1 className='text-md'>Complete the following challenge</h1>
-              <h1 className='font-bold text-3xl'>checkmate a computer</h1>
+              <h1 className='font-bold text-3xl'>{ props.title }</h1>
               <h1 className='text-md'>
-                Click verify once the opponent can't move.
+                Click verify once completed.
               </h1>
             </div>
           </div>

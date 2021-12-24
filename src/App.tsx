@@ -16,7 +16,7 @@ const App = () => {
   const message = <p>penis</p>
 
   return (
-    <CaptchaBox message={message} verified={verified} disabled={disabled}>
+    <CaptchaBox title="test" message={message} verified={verified} disabled={disabled}>
       <button onClick={() => handle()}>free robux here</button>
     </CaptchaBox>
   )
