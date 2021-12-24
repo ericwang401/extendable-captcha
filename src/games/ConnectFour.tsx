@@ -20,18 +20,21 @@ const ConnectFour = () => {
   }
 
   const highlightPlayableSlotInColumn = (show: boolean, slot: number) => {
+    let playableSlot = findPlayableSlot(slot % 7 === 0 ? 7 : slot % 7)
+
+
     if (show) {
       document
         .getElementById(
-          `slot-${findPlayableSlot(slot % 7 === 0 ? 7 : slot % 7)}`
+          `slot-${playableSlot}`
         )
-        ?.classList.add('fill-red-100')
+        ?.classList.add((turn === 'yellow' ? 'fill-yellow-100' : 'fill-red-100'))
     } else {
       document
         .getElementById(
-          `slot-${findPlayableSlot(slot % 7 === 0 ? 7 : slot % 7)}`
+          `slot-${playableSlot}`
         )
-        ?.classList.remove('fill-red-100')
+        ?.classList.remove((turn === 'yellow' ? 'fill-yellow-100' : 'fill-red-100'))
     }
   }
 
@@ -59,7 +62,7 @@ const ConnectFour = () => {
                 onMouseLeave={() => highlightPlayableSlotInColumn(false, i + 1)}
                 onClick={() => move(i + 1)}
                 viewBox='0 0 100 100'
-                className={`fill-white ${filledPositions[i + 1] === 'yellow' ? '!fill-yellow-500' : (filledPositions[i + 1] === 'red' && '!fill-red-500')}`}
+                className={`fill-white ${filledPositions[i + 1] === 'yellow' ? '!fill-yellow-400' : (filledPositions[i + 1] === 'red' && '!fill-red-400')}`}
                 xmlns='http://www.w3.org/2000/svg'
               >
                 <circle cx='50' cy='50' r='50' />
