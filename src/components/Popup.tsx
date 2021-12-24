@@ -1,10 +1,11 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import { Transition } from '@headlessui/react'
 
 interface PopupProps {
   show: boolean;
   onSubmit: Function;
   onBlur: Function;
+  children: ReactNode;
 }
 
 const Popup = (props: PopupProps) => {
@@ -36,13 +37,14 @@ const Popup = (props: PopupProps) => {
           </div>
 
           <div className='px-2 mb-2'>
+            { props.children }
           </div>
 
           <div className='flex justify-end p-2 border-t border-gray-300'>
             <div className='flex items-center flex-grow'>
             </div>
             <button
-              className='uppercase flex-0 text-white font-bold disabled:bg-gray-300 bg-blue-500 px-7 py-3 rounded-sm'
+              className='uppercase flex-0 text-white font-bold disabled:bg-gray-300 bg-blue-500 px-6 py-2 rounded-sm'
               onClick={() => props.onSubmit(true)}
             >
               Verify
