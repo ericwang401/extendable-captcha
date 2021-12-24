@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, ReactNode, useState } from 'react'
 import { Transition } from '@headlessui/react'
 
 import Popup from '@components/Popup'
@@ -6,9 +6,15 @@ import Popup from '@components/Popup'
 import logo from '@assets/images/logo_48.png'
 import checkmark from '@assets/images/checkmark.png'
 
-const CaptchaBox = () => {
+interface CaptchaBoxProps {
+  verified: boolean;
+  message?: ReactNode | string;
+  children?: ReactNode;
+  disabled?: boolean;
+}
+
+const CaptchaBox = (props: CaptchaBoxProps) => {
   const [show, setShow] = useState(false)
-  const [verified, setVerified] = useState(false)
   const [checkmarkStyle, setCheckmarkStyle] = useState({
     backgroundImage: 'url(' + checkmark + ')',
     backgroundPosition: '0px 0px',
@@ -17,11 +23,10 @@ const CaptchaBox = () => {
     marginLeft: '-5px',
   })
 
-  const submit = (verified: boolean) => {
+  const submit = () => {
     setShow(false)
-    setVerified(verified)
 
-    if (verified) {
+    if (props.verified) {
       setTimeout(() => {
         for (let i = 0, length = 20; i < length; i++) {
           setTimeout(() => {
@@ -32,8 +37,10 @@ const CaptchaBox = () => {
             setCheckmarkStyle(newCheckmarkStyle)
           })
         }
-      }, 150)
+      }, 300)
     }
+
+
   }
 
   return (
@@ -43,7 +50,7 @@ const CaptchaBox = () => {
           <div className='w-7 h-7'>
             <Transition
               as={Fragment}
-              show={!show && !verified}
+              show={!show && !props.verified}
               enter='transition-all transform duration-150'
               enterFrom='rounded-none scale-0'
               enterTo='rounded-full scale-100'
@@ -52,7 +59,7 @@ const CaptchaBox = () => {
               leaveTo='rounded-none scale-0'
             >
               <button
-                id='checkmark'
+                id='startCaptcha'
                 onClick={() => setShow(true)}
                 className='absolute border-2 w-7 h-7 border-gray-400 rounded-sm bg-white active:bg-[#EBEBEB]'
               ></button>
@@ -86,7 +93,7 @@ const CaptchaBox = () => {
 
             <Transition
               as={Fragment}
-              show={verified}
+              show={props.verified}
               enter='transition-opacity duration-150'
               enterFrom='opacity-0'
               enterTo='opacity-100'
@@ -98,7 +105,7 @@ const CaptchaBox = () => {
             </Transition>
           </div>
           <label
-            htmlFor='checkmark'
+            htmlFor='startCaptcha'
             className='flex items-center text-sm mr-5 h-full'
           >
             I'm not a robot
@@ -114,9 +121,11 @@ const CaptchaBox = () => {
 
       <Popup
         show={show}
+        message={props.message}
         onBlur={() => setShow(false)}
-        onSubmit={(verified: boolean) => submit(verified)}
-      ><h1>test</h1></Popup>
+        onSubmit={() => submit()}
+        disabled={props.disabled}
+      >{ props.children }</Popup>
     </>
   )
 }

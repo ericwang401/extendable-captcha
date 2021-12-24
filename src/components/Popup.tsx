@@ -3,9 +3,11 @@ import { Transition } from '@headlessui/react'
 
 interface PopupProps {
   show: boolean;
+  message?: ReactNode | string;
   onSubmit: Function;
   onBlur: Function;
-  children: ReactNode;
+  children?: ReactNode;
+  disabled?: boolean;
 }
 
 const Popup = (props: PopupProps) => {
@@ -42,10 +44,12 @@ const Popup = (props: PopupProps) => {
 
           <div className='flex justify-end p-2 border-t border-gray-300'>
             <div className='flex items-center flex-grow'>
+              { props.message }
             </div>
             <button
               className='uppercase flex-0 text-white font-bold disabled:bg-gray-300 bg-blue-500 px-6 py-2 rounded-sm'
-              onClick={() => props.onSubmit(true)}
+              onClick={() => props.onSubmit()}
+              disabled={props.disabled}
             >
               Verify
             </button>
